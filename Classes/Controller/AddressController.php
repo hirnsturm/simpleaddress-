@@ -59,6 +59,7 @@ class AddressController extends BaseController
         $this->view
             ->assign('uid', $this->uid)
             ->assign('settings', $this->settings)
+            ->assign('data', $this->configurationManager->getContentObject()->data)
             ->assign('mapData',
                 (1 == $this->settings['flexform']['googleMaps']['switch']) ? $this->loadMapDataAsJson()
                         : null);
