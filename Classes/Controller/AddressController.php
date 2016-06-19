@@ -44,7 +44,9 @@ class AddressController extends BaseController
     public function initializeIndexAction()
     {
         $this->addStylesheets((array) $this->settings['address']['css']);
-        $this->addJavascripts((array) $this->settings['address']['js']);
+        if ($this->settings['flexform']['googleMaps']['switch'] === '1') {
+            $this->addJavascripts((array) $this->settings['address']['js']);
+        }
     }
 
     /**
@@ -57,6 +59,7 @@ class AddressController extends BaseController
         $this->view
             ->assign('uid', $this->uid)
             ->assign('settings', $this->settings)
+            ->assign('data', $this->configurationManager->getContentObject()->data)
             ->assign('mapData',
                 (1 == $this->settings['flexform']['googleMaps']['switch']) ? $this->loadMapDataAsJson()
                         : null);
